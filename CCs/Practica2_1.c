@@ -1,12 +1,10 @@
-#include<16F877A.h>
+#include<18F4550.h>
 #include<stdbool.h>
 #fuses XT, NOWDT, NOPROTECT, NOLVP,PUT
 #use delay(clock=4000000)
 #use fast_io(B)
 #use fast_io(D)
 
-#byte portb = 0x06
-#byte portd = 0x08
 int1 x[7];
 long display;
 // && and
@@ -22,18 +20,16 @@ long display;
 //g D||B&&!A||C&&!B||!C&&B
 
 void main(){
-set_tris_B(0xFF); 
-set_tris_D(0x00); 
-portb = 0;
-portd = 0;
+set_tris_B(0x00); 
+set_tris_D(0xFF); 
 bool A,B,C,D;
 
 
 while(TRUE){ 
-A = input(PIN_B0);
-B = input(PIN_B1);
-C = input(PIN_B2);
-D = input(PIN_B3);
+A = input(PIN_D0);
+B = input(PIN_D1);
+C = input(PIN_D2);
+D = input(PIN_D3);
 
 x[0] = !D&&B||!C&&!A||C&&B||D&&!C&&!B||!D&&C&&A;   //a
 x[1] = !D&&!C||!D&&!B&&!A||!D&&B&&A||D&&!B&&A||!C&&!A; //b
@@ -45,7 +41,7 @@ x[6] = D||B&&!A||C&&!B||!C&&B; //g
 
 display = 64*x[6] + 32*x[5] + 16*x[4] + 8*x[3] + 4*x[2] + 2*x[1] + 1*x[0];  
 
-output_d(display);
+output_b(display);
 
  }
 }
