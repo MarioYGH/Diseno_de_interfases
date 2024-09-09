@@ -1,3 +1,7 @@
+// Diseñe un programa en lenguaje C que imprima dos mensajes deslizantes en un display LCD. El primer mensaje se debe visualizar en el renglón 1 del display y
+// deslizarse hacia la derecha. El segundo mensaje se debe localizar en el renglón 2 del display y deslizarse hacia la izquierda.
+
+
 #include <18F4550.h>
 #fuses NOWDT,XT,NOPROTECT
 
