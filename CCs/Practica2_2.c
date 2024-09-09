@@ -1,3 +1,7 @@
+// Diseñe un programa en lenguaje C que implemente un contador del 0 al 9. La cuenta debe incrementar en uno, cada segundo. El resultado del conteo se debe
+// mostrar en un display de 7 segmentos. Cuando el contador alcance la cuenta máxima (9) deberá reiniciar a cero (0) y continuar el conteo.
+
+
 #include<18F4550.h>
 #include<stdbool.h>
 #fuses XT, NOWDT, NOPROTECT, NOLVP,PUT
