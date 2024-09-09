@@ -1,5 +1,5 @@
-# Diseñe un programa en lenguaje C que implemente un decodificador de BCD a 7 segmentos. Para ello, obtenga las expresiones booleanas para cada segmento y
-# codifíquelas dentro de su algoritmo. Use un DIP switch para introducir las entradas binarias (BCD). Establezca un tiempo de retardo adecuado para que la visualización sea fluida.
+// Diseñe un programa en lenguaje C que implemente un decodificador de BCD a 7 segmentos. Para ello, obtenga las expresiones booleanas para cada segmento y
+// codifíquelas dentro de su algoritmo. Use un DIP switch para introducir las entradas binarias (BCD). Establezca un tiempo de retardo adecuado para que la visualización sea fluida.
 
 #include<18F4550.h>
 #include<stdbool.h>
