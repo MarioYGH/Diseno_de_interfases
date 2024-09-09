@@ -1,3 +1,10 @@
+// Diseñe un programa en lenguaje C que implemente una chapa electrónica. Primero, asigne a cada botón del teclado matricial un decimal de 0 a 7 y en su
+// algoritmo almacene una contraseña de 4 cifras. Cuando inicie el sistema, el LCD mostrará un mensaje de bienvenida y después de dos segundos le solicitará al
+// usuario que ingrese su contraseña de cuatro dígitos. Si el usuario ingreso la contraseña correcta el sistema mostrará un mensaje de éxito, y prenderá el LED
+// durante 5 segundos. Después de los 5 segundos el LED se apagará y el LCD mostrará el mensaje de bienvenida y solicitará de nuevo la contraseña. En caso de que el
+// usuario no introduzca la contraseña correcta, el LCD mostrará un mensaje informando al usuario. El usuario dispondrá de tres intentos para introducir una
+// contraseña correcta. Después del tercer intento el sistema mostrará un mensaje de bloqueo. En esta condición, el sistema no debe responder a ningún botón.
+
 #include <18F4550.h>
 #fuses XT,NOWDT,NOPROTECT,NOLVP
 
