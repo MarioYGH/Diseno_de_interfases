@@ -1,3 +1,6 @@
+// Asigne un numero decimal a cada LED, por ejemplo, LED D1 número 0, LED D2 número 1, etc. Ahora, diseñe un programa en lenguaje C que lea el numero binario
+// descrito por el estado de los pines RD0 a RD2 y lo convierta a base decimal. Para visualizar el resultado en base decimal encienda el LED correspondiente.
+
 #include <18F4550.h>
 #fuses XT,NOPROTECT,NOWDT,NOBROWNOUT,PUT,NOLVP 
 #use delay(clock=4000000)
