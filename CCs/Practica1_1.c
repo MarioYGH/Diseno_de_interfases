@@ -1,3 +1,6 @@
+// Diseñe un programa en lenguaje C que encienda uno a uno los bits del puerto B desde RB0 hasta RB7 y luego en sentido contrario desde RB7 hasta RB0 usando
+// direccionamiento por bit. Establezca un tiempo de retardo adecuado para que el encendido y apagado tenga fluidez.
+
 #include <18F4550.h>
 #fuses XT,NOPROTECT,NOWDT,NOBROWNOUT,PUT,NOLVP 
 #use delay(clock=4000000)
