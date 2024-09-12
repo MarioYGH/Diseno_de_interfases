@@ -2,14 +2,10 @@
 // y transformarlo en una palabra binaria. El valor del voltaje se debe visualizar en un display LCD.
 
 #include <18F4550.h>
-#device ADC=10
+#device ADC=10 // Configura la resolución del ADC a 10 bits // Tiene que ir después del pic pq sino marca error
 #fuses NOWDT, HS, NOPROTECT, NOLVP
-
 #use delay(clock=4000000)  
-
 #include <lcd.c> 
-  // Configura la resolución del ADC a 10 bits
-
 
 void main() {
     float voltage; 
@@ -22,20 +18,13 @@ void main() {
     setup_adc_ports(AN0); // Establecer el canal AN0 como entrada analógica
     set_adc_channel(0); // Seleccionar el canal 0 para la conversión
 
-    // Bucle principal
     while (TRUE) {
-        // Leer el valor del ADC
+     
         adc_value = read_adc();
-        delay_ms(100); // Tiempo de adquisición
-
-        // Convertir el valor ADC a voltaje
-        // La fórmula es: voltage = (adc_value / 1023.0) * 5.0
-        voltage = ((float)adc_value / 1023.0) * 5.0;
-
-        // Mostrar el voltaje en el LCD
-        lcd_gotoxy(1, 1); // Posiciona el cursor en la primera fila
-        printf(lcd_putc, "Voltaje: %1.2f V", voltage); // Muestra el valor del voltaje
-
+        delay_ms(100); 
+        voltage = ((float)adc_value / 1023.0) * 5.0; // La fórmula es: voltage = (adc_value / 1023.0) * 5.0
+        lcd_gotoxy(1, 1); 
+        printf(lcd_putc, "Voltaje: %1.2f V", voltage); 
         delay_ms(500); 
     }
 }
