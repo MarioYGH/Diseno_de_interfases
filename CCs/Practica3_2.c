@@ -1,3 +1,8 @@
+// Diseñe un programa en lenguaje C que permita controlar el tiempo en estado alto de una señal cuadrada con frecuencia 1 Hz, generada en el PIN A0. Cada botón
+// del teclado será designado para establecer un múltiplo de la duración base (100 ms) en estado alto. De manera que, el botón 1 generará una señal cuadrada con
+// 100 ms en estado alto y 900 ms en estado bajo; el botón 2: 200 ms en estado alto y 800 ms en estado bajo; el botón 3: 300 ms en estado alto y 700 ms en estado bajo.
+// Este procedimiento será aplicado de la misma manera para los 9 botones. En eldisplay LCD se debe visualizar la selección que el usuario estableció a través del teclado. Las señales generadas se verificarán con un osciloscopio.
+
 #include <18F4550.h>
 #fuses XT,NOWDT,NOPROTECT,NOLVP
 #use delay(clock=4000000)
