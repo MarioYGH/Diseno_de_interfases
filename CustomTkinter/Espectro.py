@@ -35,20 +35,44 @@ def process_signal(x, y, kernel_size, sigma, polynomial_order):
 
     return y_filtered, y_final, y_poly
 
-# Función para graficar los resultados
-def plot_results(x, y_original, y_filtered, y_final, y_poly, canvas):
-    plt.clf()
-    plt.plot(x, y_original, 'gray', label='Datos Originales', alpha=0.5)
-    plt.plot(x, y_filtered, 'blue', label='Datos Filtrados', alpha=0.7)
-    plt.plot(x, y_poly, 'red', label='Fondo Estimado', alpha=0.7)
-    plt.plot(x, y_final, 'green', label='Datos Filtrados sin Fondo', linewidth=2)
-    
-    plt.legend(loc='best')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title('Comparación de Señales: Original vs Filtrada vs Fondo')
-    
-    canvas.draw()
+# Función para graficar los resultados en dos gráficas separadas
+def plot_results(x, y_original, y_filtered, y_final, y_poly, canvas1, canvas2):
+    # Primera gráfica: datos originales, filtrados y fondo estimado
+    ax1.cla()  # Limpiar el gráfico
+    ax1.plot(x, y_original, 'gray', label='Datos Originales', alpha=0.5)
+    ax1.plot(x, y_filtered, 'blue', label='Datos Filtrados', alpha=0.7)
+    ax1.plot(x, y_poly, 'red', label='Fondo Estimado', alpha=0.7)
+    ax1.legend(loc='best')
+    ax1.set_xlabel('X')
+    ax1.set_ylabel('Y')
+    ax1.set_title('Datos Originales y Filtrados')
+    canvas1.draw()
+
+    # Segunda gráfica: datos filtrados sin fondo
+    ax2.cla()  # Limpiar el gráfico
+    ax2.plot(x, y_final, 'green', label='Datos Filtrados sin Fondo', linewidth=2)
+    ax2.legend(loc='best')
+    ax2.set_xlabel('X')
+    ax2.set_ylabel('Y')
+    ax2.set_title('Datos Filtrados sin Fondo')
+    canvas2.draw()
+
+# Función para guardar los resultados en un archivo CSV
+def save_to_csv():
+    file_path = filedialog.asksaveasfilename(defaultextension='.csv', filetypes=[("CSV files", "*.csv")])
+    if file_path:
+        try:
+            data = pd.DataFrame({
+                'X': x,
+                'Original': y,
+                'Filtrado': y_filtered,
+                'Fondo Estimado': y_poly,
+                'Filtrado sin Fondo': y_final
+            })
+            data.to_csv(file_path, index=False)
+            messagebox.showinfo("Guardar Datos", f"Datos guardados exitosamente en {file_path}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Error al guardar el archivo: {str(e)}")
 
 # Función que se ejecuta cuando se selecciona un archivo
 def select_file():
@@ -61,12 +85,12 @@ def select_file():
         except Exception as e:
             messagebox.showerror("Error", f"Error al leer el archivo: {str(e)}")
 
-# Función para actualizar la gráfica cuando cambian los parámetros
+# Función para actualizar las gráficas cuando cambian los parámetros
 def update_plot():
     try:
-        global kernel_size, sigma, polynomial_order
+        global y_filtered, y_final, y_poly, kernel_size, sigma, polynomial_order
         y_filtered, y_final, y_poly = process_signal(x, y, kernel_size, sigma, polynomial_order)
-        plot_results(x, y, y_filtered, y_final, y_poly, canvas)
+        plot_results(x, y, y_filtered, y_final, y_poly, canvas1, canvas2)
     except Exception as e:
         messagebox.showerror("Error", f"Error al procesar la señal: {str(e)}")
 
@@ -86,44 +110,58 @@ def on_polynomial_order_change(value):
     polynomial_order = int(value)
     update_plot()
 
+# Configuración de estilo
+ctk.set_appearance_mode("dark")  # Estilo oscuro para la interfaz
+ctk.set_default_color_theme("dark-blue")  # Tema de color oscuro
+
 # Crear la ventana principal
 root = ctk.CTk()
 root.title("Procesamiento de Señal en Tiempo Real")
 root.geometry("900x700")
+root.configure(bg='black')  # Fondo negro de la ventana
 
 # Crear frame para la selección de archivo y sliders
-frame_controls = ctk.CTkFrame(root)
+frame_controls = ctk.CTkFrame(root, fg_color="black")
 frame_controls.pack(pady=10)
 
 btn_select_file = ctk.CTkButton(frame_controls, text="Seleccionar Archivo", command=select_file)
 btn_select_file.pack(pady=5)
 
+# Botón para guardar los datos
+btn_save = ctk.CTkButton(frame_controls, text="Guardar Datos", command=save_to_csv)
+btn_save.pack(pady=5)
+
 # Sliders para ajustar los parámetros
 slider_kernel_size = ctk.CTkSlider(frame_controls, from_=3, to=21, number_of_steps=19, command=on_kernel_size_change)
 slider_kernel_size.set(kernel_size)
 slider_kernel_size.pack(pady=5)
-label_kernel = ctk.CTkLabel(frame_controls, text="Tamaño del Kernel")
+label_kernel = ctk.CTkLabel(frame_controls, text="Tamaño del Kernel", text_color="white")
 label_kernel.pack()
 
 slider_sigma = ctk.CTkSlider(frame_controls, from_=1, to=100, command=on_sigma_change)
 slider_sigma.set(sigma)
 slider_sigma.pack(pady=5)
-label_sigma = ctk.CTkLabel(frame_controls, text="Sigma")
+label_sigma = ctk.CTkLabel(frame_controls, text="Sigma", text_color="white")
 label_sigma.pack()
 
 slider_polynomial_order = ctk.CTkSlider(frame_controls, from_=1, to=10, command=on_polynomial_order_change)
 slider_polynomial_order.set(polynomial_order)
 slider_polynomial_order.pack(pady=5)
-label_polynomial = ctk.CTkLabel(frame_controls, text="Orden del Polinomio")
+label_polynomial = ctk.CTkLabel(frame_controls, text="Orden del Polinomio", text_color="white")
 label_polynomial.pack()
 
-# Crear un área para la gráfica
-frame_plot = ctk.CTkFrame(root)
+# Crear un área para las gráficas
+frame_plot = ctk.CTkFrame(root, fg_color="black")
 frame_plot.pack(fill='both', expand=True)
 
-fig, ax = plt.subplots(figsize=(8, 6))
-canvas = FigureCanvasTkAgg(fig, master=frame_plot)
-canvas.get_tk_widget().pack(fill='both', expand=True)
+# Crear dos figuras diferentes para las gráficas
+fig1, ax1 = plt.subplots(figsize=(6, 4))
+canvas1 = FigureCanvasTkAgg(fig1, master=frame_plot)
+canvas1.get_tk_widget().pack(side='left', fill='both', expand=True)
+
+fig2, ax2 = plt.subplots(figsize=(6, 4))
+canvas2 = FigureCanvasTkAgg(fig2, master=frame_plot)
+canvas2.get_tk_widget().pack(side='left', fill='both', expand=True)
 
 # Iniciar el loop principal
 root.mainloop()
