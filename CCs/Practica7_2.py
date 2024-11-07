@@ -1,3 +1,7 @@
+# Diseñe una interfaz gráfica que permita ingresar los siguientes las amplitudes y frecuencias angulares de tres funciones armónicas, específicamente funciones de
+# la forma A sin ωt. La interfaz debe incluir un Axes para mostrar la combinación lineal
+# de las tres funciones armónicas (y), y un Axes adicional para mostrar el plano fase (y, ẏ).
+
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
