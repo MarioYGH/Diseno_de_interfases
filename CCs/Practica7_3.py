@@ -1,3 +1,6 @@
+# Diseñe una interfaz gráfica que permita ingresar el número de términos de la la serie de Fourier de la función f(t) que fue proporcionada en clase. Incluya un Axes que
+# muestre la función f(t) y un segundo Axes donde se muestren las funciones f(t) y la serie de Fourier.
+
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
