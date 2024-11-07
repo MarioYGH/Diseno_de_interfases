@@ -1,3 +1,9 @@
+# Diseñe una interfaz gráfica que resuelva numéricamente la ecuación diferencial de segundo orden, ẍ+ 2ξωnẋ + ωn 2x = 0, a través del método de Runge-Kutta cuarto orden. 
+# La interfaz debe permitir el ingreso de los valores de ξ, ωn, condiciones iniciales, tiempo inicial y tiempo de simulación. El paso de integración debe ser ingresado 
+# por el usuario a través de un Slider. El valor máximo del Slider debe coincidir con el paso de integración dado por el teorema de Nyquist, mientras el valor mínimo del
+# Slider debe coincidir con el valor mínimo divido entrediez. Las soluciones de los estados de la ecuación diferencial se deben mostrar en un Axes. Adicionalmente, 
+# incluya un Axes para graficar la transformada de Fourier numérica de uno de los estados
+
 import customtkinter as ctk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
